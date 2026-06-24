@@ -41,12 +41,79 @@ def repository_from_url(url: str) -> str:
     return match.group(1)
 
 
+def format_stars(stars: int | None) -> str:
+    if stars is None:
+        return ""
+    if stars >= 1_000_000:
+        value = f"{stars / 1_000_000:.1f}m"
+    elif stars >= 1_000:
+        value = f"{stars / 1_000:.1f}k"
+    else:
+        value = str(stars)
+    return value.replace(".0k", "k").replace(".0m", "m")
+
+
+def clean_pr_title(title: str) -> str:
+    clean = re.sub(
+        r"^(feat|fix|test|tests|docs|doc|refactor|perf|ci|chore|build)(\([^)]+\))?!?:\s*",
+        "",
+        title.strip(),
+        flags=re.IGNORECASE,
+    )
+    return clean[:1].upper() + clean[1:] if clean else title.strip()
+
+
+def improvement_summary(title: str) -> str:
+    lower = title.lower()
+    clean = clean_pr_title(title)
+    if "frontmatter" in lower or "metadata" in lower:
+        aspect = "Metadata extraction"
+    elif "proxy" in lower:
+        aspect = "Network config robustness"
+    elif "timeout" in lower:
+        aspect = "Configuration resilience"
+    elif "paginate" in lower or "pagination" in lower:
+        aspect = "API pagination"
+    elif "fallback" in lower or "retry" in lower:
+        aspect = "Fallback reliability"
+    elif "non-finite" in lower or "strict json" in lower:
+        aspect = "Data serialization"
+    elif "end date" in lower:
+        aspect = "Data loading correctness"
+    elif "drawdown" in lower:
+        aspect = "Risk metric correctness"
+    elif "symbol market" in lower or "market" in lower:
+        aspect = "Market-aware routing"
+    elif "stt" in lower or "frame task" in lower:
+        aspect = "Streaming task cleanup"
+    elif re.match(r"^test(s)?(\([^)]+\))?:", lower):
+        aspect = "Test coverage"
+    elif re.match(r"^feat(\([^)]+\))?:", lower):
+        aspect = "Feature work"
+    elif re.match(r"^fix(\([^)]+\))?:", lower) or lower.startswith("fix "):
+        aspect = "Bug fix"
+    elif re.match(r"^docs?(\([^)]+\))?:", lower):
+        aspect = "Documentation"
+    elif re.match(r"^refactor(\([^)]+\))?:", lower):
+        aspect = "Refactor"
+    else:
+        aspect = "Project improvement"
+    return f"{aspect}: {clean}"
+
+
+def fetch_repo_meta(repo: str, token: str, cache: dict[str, dict[str, Any]]) -> dict[str, Any]:
+    if repo not in cache:
+        cache[repo] = request_json(f"{API_ROOT}/repos/{repo}", token)
+    return cache[repo]
+
+
 def fetch_merged_prs(username: str, token: str, limit: int) -> list[dict[str, str]]:
     query = f"is:pr is:merged author:{username} archived:false"
     params = urlencode({"q": query, "sort": "updated", "order": "desc", "per_page": min(max(limit * 2, 30), 100)})
     data = request_json(f"{API_ROOT}/search/issues?{params}", token)
 
     rows: list[dict[str, str]] = []
+    repo_cache: dict[str, dict[str, Any]] = {}
     for item in data.get("items", []):
         repo = repository_from_url(str(item.get("repository_url", "")))
         number = item.get("number")
@@ -56,12 +123,17 @@ def fetch_merged_prs(username: str, token: str, limit: int) -> list[dict[str, st
         merged_at = str(pr.get("merged_at") or item.get("closed_at") or "")[:10]
         if not merged_at:
             continue
+        meta = fetch_repo_meta(repo, token, repo_cache)
+        if meta.get("private"):
+            continue
         rows.append(
             {
                 "repo": repo,
                 "repo_url": f"https://github.com/{repo}",
+                "stars": format_stars(meta.get("stargazers_count")),
                 "number": str(number),
                 "title": str(item.get("title", "")),
+                "improvement": improvement_summary(str(item.get("title", ""))),
                 "url": str(item.get("html_url", "")),
                 "merged_at": merged_at,
             }
@@ -76,14 +148,14 @@ def render_table(rows: list[dict[str, str]]) -> str:
         return "_No merged pull requests found yet._"
 
     lines = [
-        "| Project | Pull Request | Merged |",
-        "|---|---|---|",
+        "| Project | Stars | PR | Improvement | Merged |",
+        "|---|---:|---|---|---|",
     ]
     for row in rows:
         repo = markdown_escape(row["repo"])
-        title = markdown_escape(row["title"])
+        improvement = markdown_escape(row["improvement"])
         lines.append(
-            f"| [`{repo}`]({row['repo_url']}) | [#{row['number']} {title}]({row['url']}) | {row['merged_at']} |"
+            f"| [`{repo}`]({row['repo_url']}) | {row['stars']} | [#{row['number']}]({row['url']}) | {improvement} | {row['merged_at']} |"
         )
     return "\n".join(lines)
 
@@ -117,4 +189,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
