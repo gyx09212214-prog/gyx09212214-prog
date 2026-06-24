@@ -44,6 +44,8 @@ def repository_from_url(url: str) -> str:
 def format_stars(stars: int | None) -> str:
     if stars is None:
         return ""
+    if stars < 100:
+        return ""
     if stars >= 1_000_000:
         value = f"{stars / 1_000_000:.1f}m"
     elif stars >= 1_000:
