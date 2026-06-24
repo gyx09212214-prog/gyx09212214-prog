@@ -15,7 +15,6 @@
 | [`HKUDS/Vibe-Trading`](https://github.com/HKUDS/Vibe-Trading) | [#238 fix(run-card): write strict JSON for non-finite metrics](https://github.com/HKUDS/Vibe-Trading/pull/238) | 2026-06-15 |
 | [`HKUDS/Vibe-Trading`](https://github.com/HKUDS/Vibe-Trading) | [#227 fix(loaders): tolerate malformed crypto timeout env vars](https://github.com/HKUDS/Vibe-Trading/pull/227) | 2026-06-14 |
 | [`HKUDS/Vibe-Trading`](https://github.com/HKUDS/Vibe-Trading) | [#226 fix(loaders): include requested yfinance end date](https://github.com/HKUDS/Vibe-Trading/pull/226) | 2026-06-14 |
-| [`gyx09212214-prog/quant-backtest`](https://github.com/gyx09212214-prog/quant-backtest) | [#1 Sync local workspace updates](https://github.com/gyx09212214-prog/quant-backtest/pull/1) | 2026-06-11 |
 | [`polakowo/vectorbt`](https://github.com/polakowo/vectorbt) | [#854 Fix Data.get for unnamed multi-symbol series](https://github.com/polakowo/vectorbt/pull/854) | 2026-06-10 |
 | [`hkopenai/hk-finance-mcp-server`](https://github.com/hkopenai/hk-finance-mcp-server) | [#16 Paginate bank branch locator fetches](https://github.com/hkopenai/hk-finance-mcp-server/pull/16) | 2026-06-10 |
 | [`hkopenai/hk-finance-mcp-server`](https://github.com/hkopenai/hk-finance-mcp-server) | [#15 Improve ATM locator pagination and language](https://github.com/hkopenai/hk-finance-mcp-server/pull/15) | 2026-06-10 |
