@@ -33,6 +33,6 @@
 | [`HKUDS/Vibe-Trading`](https://github.com/HKUDS/Vibe-Trading) | 34.4k | [#238](https://github.com/HKUDS/Vibe-Trading/pull/238) | Data serialization: Write strict JSON for non-finite metrics | 2026-06-15 |
 | [`HKUDS/Vibe-Trading`](https://github.com/HKUDS/Vibe-Trading) | 34.4k | [#227](https://github.com/HKUDS/Vibe-Trading/pull/227) | Configuration resilience: Tolerate malformed crypto timeout env vars | 2026-06-14 |
 | [`HKUDS/Vibe-Trading`](https://github.com/HKUDS/Vibe-Trading) | 34.4k | [#226](https://github.com/HKUDS/Vibe-Trading/pull/226) | Data loading correctness: Include requested yfinance end date | 2026-06-14 |
-| [`polakowo/vectorbt`](https://github.com/polakowo/vectorbt) | 9.2k | [#854](https://github.com/polakowo/vectorbt/pull/854) | Bug fix: Fix Data.get for unnamed multi-symbol series | 2026-06-10 |
+| [`polakowo/vectorbt`](https://github.com/polakowo/vectorbt) | 9.3k | [#854](https://github.com/polakowo/vectorbt/pull/854) | Bug fix: Fix Data.get for unnamed multi-symbol series | 2026-06-10 |
 | [`hkopenai/hk-finance-mcp-server`](https://github.com/hkopenai/hk-finance-mcp-server) |  | [#16](https://github.com/hkopenai/hk-finance-mcp-server/pull/16) | API pagination: Paginate bank branch locator fetches | 2026-06-10 |
 <!-- MERGED-PRS:END -->
