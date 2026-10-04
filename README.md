@@ -24,7 +24,7 @@
 | [`future-agi/future-agi`](https://github.com/future-agi/future-agi) | 2.1k | [#1024](https://github.com/future-agi/future-agi/pull/1024) | Bug fix: Show copy action for tabless datapoint cards | 2026-06-25 |
 | [`HKUDS/Vibe-Trading`](https://github.com/HKUDS/Vibe-Trading) | 34.5k | [#306](https://github.com/HKUDS/Vibe-Trading/pull/306) | Data serialization: [codex] fix(validation): write strict JSON outputs | 2026-06-25 |
 | [`livekit/agents`](https://github.com/livekit/agents) | 14.5k | [#6193](https://github.com/livekit/agents/pull/6193) | Streaming task cleanup: Clean up STT input frame task | 2026-06-24 |
-| [`agiprolabs/claude-trading-skills`](https://github.com/agiprolabs/claude-trading-skills) | 403 | [#3](https://github.com/agiprolabs/claude-trading-skills/pull/3) | Risk metric correctness: Use latest peak for current drawdown start | 2026-06-23 |
+| [`agiprolabs/claude-trading-skills`](https://github.com/agiprolabs/claude-trading-skills) | 405 | [#3](https://github.com/agiprolabs/claude-trading-skills/pull/3) | Risk metric correctness: Use latest peak for current drawdown start | 2026-06-23 |
 | [`ginlix-ai/LangAlpha`](https://github.com/ginlix-ai/LangAlpha) | 1.8k | [#253](https://github.com/ginlix-ai/LangAlpha/pull/253) | Market-aware routing: Route batch snapshots by symbol market | 2026-06-22 |
 | [`deepset-ai/haystack`](https://github.com/deepset-ai/haystack) | 26.6k | [#11615](https://github.com/deepset-ai/haystack/pull/11615) | Metadata extraction: Extract Markdown frontmatter metadata | 2026-06-17 |
 | [`ranaroussi/yfinance`](https://github.com/ranaroussi/yfinance) | 25.4k | [#2853](https://github.com/ranaroussi/yfinance/pull/2853) | Network config robustness: Normalize configured proxy strings | 2026-06-15 |
